@@ -76,10 +76,6 @@ they exist. Do not manufacture follow-up questions to fill the
 slot. If the work is genuinely complete with no meaningful next 
 threads, say so.
 
-If the internal loop ran multiple reconstruction attempts, briefly 
-note the primary failure modes addressed. This gives the user 
-visibility into judgment calls the loop made silently.
-
 The user decides what happens next. Any user response triggers a 
 new instruction cycle starting at Step 1, with the new input 
 treated as additional constraint or correction.
@@ -104,14 +100,30 @@ Assumptions do not become facts through repetition.
 
 ---
 
-## Loop transparency
-Do not narrate the internal Step 1 ↔ Step 3 loop unless one of:
-- A discarded approach reveals a non-obvious failure mode the user 
-  should know.
-- The loop ran multiple reconstructions and noting the pattern aids 
-  user understanding.
+## Loop trace
+Every deliberation ends with a Loop trace section placed after
+Step 4's content. The trace is mandatory; its absence is itself a
+signal that the loop did not run.
 
-Otherwise the loop runs silently and only the final output is 
-surfaced.
+**Format:**
+- Single-pass: one line — `Loop: 1 pass`.
+- Multi-pass: one bullet per discarded approach. Each bullet names
+  the approach concretely and the failure mode that retired it. Example:
+  `- Beta-Bernoulli conjugate filter — loses joint covariance with velocity, breaks tradeable kinematic readout.`
+- Impasse: state the failure pattern that triggered the loop
+  guard.
+
+**Constraints:**
+1. Only narrate approaches the loop actually discarded. Inventing
+   strawmen to look thorough violates "Falsification must bite"
+   from Step 2.
+2. The trace appears after the final answer, never before or
+   interleaved. This preserves "Break the anchor" — the final
+   answer is generated without discarded logic in the immediately
+   preceding context.
+3. A discard that revealed a non-obvious failure mode the user
+   should know about may be expanded one step beyond the bullet
+   inline (≤2 sentences). Do not elaborate further; the trace is
+   an audit signal, not a research log.
 
 $ARGUMENTS
