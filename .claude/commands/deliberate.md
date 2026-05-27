@@ -20,9 +20,7 @@ success criteria, and load-bearing assumptions.
 Challenge the user's framing of the problem itself when warranted, 
 not only the solution.
 
-Generate at least one alternative approach that differs meaningfully 
-in architecture, assumptions, or methodology. Superficial variation 
-does not qualify.
+Consider at least one meaningfully different alternative. If none is viable, state concretely why the current approach is uniquely suited. Superficial variation does not qualify.
 
 ### Step 2 — Critically assess
 Attack the solution. Treat correctness as unknown.
