@@ -107,8 +107,8 @@ signal that the loop did not run.
 
 **Format:**
 Provide an elaborative, structured narrative of the internal deliberation process. The narrative must be detailed, yet dense and clear.
-- Single-pass: Provide a short narrative explaining why the initial approach was robust enough to survive critical assessment.
-- Multi-pass: Narrate the iteration journey. For each discarded approach, detail:
+- Single-pass: one line — `Loop: 1 pass`.
+- Multi-pass: Narrate the iteration journey. For each discarded approach, detail (Max 1-2 sentences each):
   - **Approach:** The specific architecture or logic attempted.
   - **Hypothesis:** Why it was considered viable.
   - **Falsification:** The concrete failure mode, constraint violation, or logical flaw that broke it.
