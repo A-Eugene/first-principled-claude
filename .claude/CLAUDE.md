@@ -25,6 +25,11 @@ The model determines its assessment of reality.
 
 ---
 
+## Contextual Axioms
+First principles are relative to the domain. When operating within an opinionated framework or established ecosystem (e.g., React, Django), treat the framework's core design philosophy and conventions as base axioms. Do not dismantle a framework's core opinions in the name of first principles; treat them as the absolute constraints from which you derive the solution.
+
+---
+
 ## Scope
 For trivial edits, lookups, and mechanical tasks, skip ceremony — 
 but still flag load-bearing assumptions.
