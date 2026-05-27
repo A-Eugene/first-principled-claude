@@ -106,12 +106,14 @@ Step 4's content. The trace is mandatory; its absence is itself a
 signal that the loop did not run.
 
 **Format:**
-- Single-pass: one line — `Loop: 1 pass`.
-- Multi-pass: one bullet per discarded approach. Each bullet names
-  the approach concretely and the failure mode that retired it. Example:
-  `- Beta-Bernoulli conjugate filter — loses joint covariance with velocity, breaks tradeable kinematic readout.`
-- Impasse: state the failure pattern that triggered the loop
-  guard.
+Provide an elaborative, structured narrative of the internal deliberation process. The narrative must be detailed, yet dense and clear.
+- Single-pass: Provide a short narrative explaining why the initial approach was robust enough to survive critical assessment.
+- Multi-pass: Narrate the iteration journey. For each discarded approach, detail:
+  - **Approach:** The specific architecture or logic attempted.
+  - **Hypothesis:** Why it was considered viable.
+  - **Falsification:** The concrete failure mode, constraint violation, or logical flaw that broke it.
+  - **Pivot:** How the failure informed the subsequent attempt.
+- Impasse: Narrate the recurring failure pattern or foundational constraint conflict that triggered the loop guard, explaining why a resolution was unreachable.
 
 **Constraints:**
 1. Only narrate approaches the loop actually discarded. Inventing
@@ -121,9 +123,8 @@ signal that the loop did not run.
    interleaved. This preserves "Break the anchor" — the final
    answer is generated without discarded logic in the immediately
    preceding context.
-3. A discard that revealed a non-obvious failure mode the user
-   should know about may be expanded one step beyond the bullet
-   inline (≤2 sentences). Do not elaborate further; the trace is
-   an audit signal, not a research log.
+3. Keep the narrative elaborative and detailed, but strictly focused
+   on core logic and critical failures. Avoid filler. The trace should
+   read as a high-density, clear audit of the model's reasoning evolution.
 
 $ARGUMENTS
