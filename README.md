@@ -1,5 +1,7 @@
 # First-Principled Claude
 
+**Version 1.0**
+
 This repository contains the configuration and context files for **First-Principled Claude**, a framework designed to override the default sycophantic tendencies of Large Language Models (LLMs) and instill a rigorous, metacognitive, and adversarial problem-solving mindset.
 
 ## The First Principle of LLM Persona
@@ -12,27 +14,25 @@ To fundamentally change the model's capabilities, we must alter its operating co
 
 ## Components
 
-### 1. The Kernel: `.claude/CLAUDE.md`
+### The Kernel: `.claude/CLAUDE.md`
 This acts as the base operating system for the model's mindset. It establishes the baseline disposition for all interactions, no matter how trivial.
 
 - **Truth over Agreement:** Instructs the model to disagree with flawed framing and push back on invalid assumptions (*Disagree and Commit*).
 - **Constraint Elicitation:** Forbids silent assumptions on load-bearing constraints, forcing the model to ask targeted questions instead of guessing.
 - **Verification Posture:** Demands explicit differentiation between conceptual reasoning and empirical verification.
-- **Metacognitive Humility:** Forces the model to recognize that "coherence is not correctness" and that its own reasoning process is a potential source of error.
+- **Metacognitive Humility:** Forces the model to recognize that "coherence is not correctness," that its own reasoning is a potential source of error, and that its reports about its own process are not guaranteed faithful to it.
+- **Reasoning Discipline:** For substantial work — generate a genuinely different alternative before committing, construct then adversarially critique that construction, and surface the residue (flaws, tradeoffs, unverified assumptions).
 
-### 2. The Deliberation Protocol: `.claude/commands/deliberate.md`
-While `CLAUDE.md` sets the passive mindset, `/deliberate` is the active, heavy-duty iteration engine invoked for complex problems (like deep architectural bugs, system design, or non-trivial planning).
+## Working With Token Conditioning
 
-LLMs suffer from **context anchoring**—once they generate a token, it mathematically biases all future tokens. This makes it incredibly difficult for an LLM to organically pivot away from a flawed initial approach. 
+LLMs exhibit **context anchoring**: once a token is generated, it mathematically conditions every subsequent token. The framework works *with* this mechanism:
 
-The deliberation protocol breaks this anchor through a formal internal loop:
-1. **Construct:** Build a solution from first principles and generate meaningful alternatives.
-2. **Critically Assess:** Attack the solution aggressively. Treat correctness as unknown. Falsification must have consequences (Patch, Reject, Confirm).
-3. **Internal Verdict:** If the foundation is flawed, explicitly declare the premise invalid in context to break the mathematical anchor of previous tokens.
-4. **Surface:** Present the final solution alongside a strict, dense **Loop trace**. This trace (detailing the *Approach, Hypothesis, Falsification, and Pivot* for each discarded attempt) provides a transparent, high-density audit of the internal thought process, entirely free of conversational filler.
+- **It steers reasoning at generation time.** Considerations placed into context — alternatives, adversarial critique, surfaced assumptions — shape the tokens that follow. This conditioning is the lever the kernel pulls.
+- **It reaches for a fresh context when independence matters.** A genuinely independent check comes from a new context that does not carry the prior reasoning forward, since reasoning already in the window keeps conditioning the output.
+- **It constrains what the model emits.** Every instruction targets observable output — what to generate, label, verify, or surface — which is the part of the model that instructions can actually move.
 
 ## Usage
 
-These files are designed to be ingested into the LLM's system prompt or workspace context. 
-- For trivial tasks and mechanical edits, the model runs on the `CLAUDE.md` kernel, remaining concise but first-principled. 
-- For deep, complex tasks, the user (or the model itself) invokes the `/deliberate` protocol to engage the adversarial iteration loop.
+These files are designed to be ingested into the LLM's system prompt or workspace context.
+- For trivial tasks and mechanical edits, the model stays concise but first-principled.
+- For design, architecture, or costly-to-reverse decisions, the kernel's Reasoning discipline engages automatically: alternatives, adversarial self-critique, and an explicit surfacing of flaws, tradeoffs, and unverified assumptions.
