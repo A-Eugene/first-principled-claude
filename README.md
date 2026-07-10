@@ -1,6 +1,6 @@
 # First-Principled Claude
 
-**Version 1.0**
+**Version 2.0**
 
 This repository contains the configuration and context files for **First-Principled Claude**, a framework designed to override the default sycophantic tendencies of Large Language Models (LLMs) and instill a rigorous, metacognitive, and adversarial problem-solving mindset.
 
@@ -12,16 +12,30 @@ By default, standard system prompts configure LLMs as "helpful, harmless assista
 
 To fundamentally change the model's capabilities, we must alter its operating constraints. The files in this repository inject high-density, behavioral constraints directly into the model's context. By defining the rules of engagement, we shift the model's probability distribution away from superficial compliance and toward aggressive, first-principled reasoning.
 
-## Components
+## Structure
 
-### The Kernel: `.claude/CLAUDE.md`
-This acts as the base operating system for the model's mindset. It establishes the baseline disposition for all interactions, no matter how trivial.
+As of v2.0, the kernel is stratified into layers so that model-specific tactics can drift and be re-verified without disturbing the epistemic core:
 
-- **Truth over Agreement:** Instructs the model to disagree with flawed framing and push back on invalid assumptions (*Disagree and Commit*).
-- **Constraint Elicitation:** Forbids silent assumptions on load-bearing constraints, forcing the model to ask targeted questions instead of guessing.
-- **Verification Posture:** Demands explicit differentiation between conceptual reasoning and empirical verification.
-- **Metacognitive Humility:** Forces the model to recognize that "coherence is not correctness," that its own reasoning is a potential source of error, and that its reports about its own process are not guaranteed faithful to it.
-- **Reasoning Discipline:** For substantial work — generate a genuinely different alternative before committing, construct then adversarially critique that construction, and surface the residue (flaws, tradeoffs, unverified assumptions).
+### I. Invariant core — model-independent
+The base operating system for the model's mindset, in force regardless of which model is running. Model-indexed claims are forbidden here by construction (see Maintenance).
+
+- **Operating mode:** distinguishes **Interactive** (a human in the loop; questions and judgment calls can be deferred to them) from **Autonomous** (subagents, background/scheduled runs; no blocking on questions — choose the defensible default, act, and surface the assumption). Verification is identical in both modes.
+- **Default disposition / Truth over Agreement:** derive from first principles when the standard solution is suspect or non-standard; disagree with flawed framing when evidence supports it (*Disagree and Commit*).
+- **Scope:** a continuous reasoning-effort dial, not a binary — depth scales with the cost of being wrong (stakes × how hard the decision is to undo), collapsing to near-zero on routine, reversible work.
+- **Constraint elicitation:** forbids silent assumptions on load-bearing constraints; ask specifically and only when the constraint is load-bearing, undeterminable, and would otherwise default silently.
+- **Reasoning discipline:** held as *intent, not a fixed sequence* — name a genuine alternative before committing, conclude last, critique adversarially then discount it (anchored), surface the residue. A **de-anchored check** (fresh-context, via a subagent) is mandatory for decisions that are both high-stakes and hard to reverse.
+- **Verification posture:** channels ranked by independence from the claim's own generation — tool/execution first, fresh-context review next, same-context conceptual derivation last (weakest, used only when nothing stronger is available). Closes with an explicit verification line: what was checked, against which channel, what remains unverified.
+- **Confidence / Anti-hallucination / Meta-cognitive humility:** label claims grounded / inferred / unverified by provenance; a fabricated fact is generated through the same mechanism as a recalled one, with no internal flag distinguishing them — so verify and mark rather than trust coherence.
+- **Output delivery:** internal rigor is never traded for brevity; length is minimized only after correctness, robustness, and actionability are served.
+
+### II. Model dispatch — model-specific overlay
+A thin layer, isolated so it can be re-verified per model release without touching the core: identify the running model from environment context (never introspection), then apply effort defaults and behavioral quirks specific to that model (e.g. how literally it follows instructions, how readily it self-spawns a de-anchored check).
+
+### III. User preferences
+Concrete personal overrides applied literally, never abstracted into principles (formatting rules, presentation order, project-specific pointers).
+
+### Maintenance
+The kernel's own amendment rules: **intent over prescription** (state disciplines as goals, not step-sequences — model-specific tactics perish while epistemic intent survives releases); **prune by null test** (a clause whose removal changes nothing gets deleted); **re-verify Model dispatch at each model release.**
 
 ## Working With Token Conditioning
 
