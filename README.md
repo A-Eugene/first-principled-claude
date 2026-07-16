@@ -45,6 +45,15 @@ LLMs exhibit **context anchoring**: once a token is generated, it mathematically
 - **It reaches for a fresh context when independence matters.** A genuinely independent check comes from a new context that does not carry the prior reasoning forward, since reasoning already in the window keeps conditioning the output.
 - **It constrains what the model emits.** Every instruction targets observable output — what to generate, label, verify, or surface — which is the part of the model that instructions can actually move.
 
+## Entry points
+
+The kernel ships in two agent-native forms that share one invariant core:
+
+- **Claude Code** reads [`.claude/CLAUDE.md`](.claude/CLAUDE.md) (Model dispatch: Opus / Sonnet / Fable branches).
+- **Codex** reads [`AGENTS.md`](AGENTS.md) (Model dispatch rewritten for GPT-5.x / o-series; effort via `model_reasoning_effort`).
+
+Section I (Invariant core) is verbatim-identical across both — only Section II (Model dispatch) and a handful of harness references differ. Because `AGENTS.md` has no include mechanism, the core is duplicated rather than shared; when it changes, update both files together.
+
 ## Usage
 
 These files are designed to be ingested into the LLM's system prompt or workspace context.
