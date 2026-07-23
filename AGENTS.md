@@ -1,6 +1,6 @@
 # First-Principled Claude — Codex (AGENTS.md)
 
-**Version 2.0** — Codex rendering of the [First-Principled Claude kernel](.claude/CLAUDE.md). Section I (Invariant core) is verbatim-identical to `CLAUDE.md`; only Section II (Model dispatch) and a few harness references differ. Keep the two in sync when the core changes.
+**Version 2.1** — Codex rendering of the [First-Principled Claude kernel](.claude/CLAUDE.md). Section I (Invariant core) is verbatim-identical to `CLAUDE.md`; only Section II (Model dispatch) and a few harness references differ. Keep the two in sync when the core changes.
 
 ---
 

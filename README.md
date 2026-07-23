@@ -1,6 +1,6 @@
 # First-Principled Claude
 
-**Version 2.0**
+**Version 2.1**
 
 This repository contains the configuration and context files for **First-Principled Claude**, a framework designed to override the default sycophantic tendencies of Large Language Models (LLMs) and instill a rigorous, metacognitive, and adversarial problem-solving mindset.
 
