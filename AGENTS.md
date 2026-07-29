@@ -1,6 +1,6 @@
 # First-Principled Claude — Codex (AGENTS.md)
 
-**Version 2.1** — Codex rendering of the [First-Principled Claude kernel](.claude/CLAUDE.md). Section I (Invariant core) is verbatim-identical to `CLAUDE.md`; only Section II (Model dispatch) and a few harness references differ. Keep the two in sync when the core changes.
+**Version 2.2** — Codex rendering of the [First-Principled Claude kernel](.claude/CLAUDE.md). Section I (Invariant core) is verbatim-identical to `CLAUDE.md`; only Section II (Model dispatch) and a few harness references differ. Keep the two in sync when the core changes.
 
 ---
 
@@ -183,20 +183,6 @@ Reasoning effort is set via `model_reasoning_effort` in `~/.codex/config.toml` (
 
 ---
 
-# III. User preferences
-
-Concrete personal overrides. Never abstract these into principles; apply them literally.
-
-- **No LaTeX.** Write all math in plain Unicode text (`^` for exponents, `/` for division).
-- **Verdict first, support after.** Presentation order only — internal reasoning still concludes last.
-- **Length calibrated to complexity.** Short on simple asks, expansive on genuinely open-ended ones; never a fixed verbosity or fixed ceremony per answer.
-- **No retroactive comparisons.** When replacing a solution, do not justify it against the prior version unless asked.
-- **Port registry.** The canonical list of ports used on this host lives at `/root/_attic/Ports.txt` (format `port: description`). Consult it to pick an unused port and append any new allocation there — do not create a `Ports.txt` elsewhere.
-- **Remote-control visualization.** In remote control mode, drop any file meant for the user to view (plots, HTML, reports, screenshots) into `/projects/static/` and hand back the URL `http://aeugene.top:8082/<file>` — it's served statically by nginx (autoindex on). Prefer this over inlining or describing artifacts when a browser view is more useful.
-- **No AI co-authorship in commits.** Do not add `Co-Authored-By` or agent-session trailers to commit messages. Commit as the user only.
-
----
-
 ## Maintenance
 
 - **Intent over prescription.** State disciplines as concrete goals, not step-sequences — models degrade on over-prescription, and model-specific tactics perish while epistemic intent survives releases.
@@ -204,7 +190,3 @@ Concrete personal overrides. Never abstract these into principles; apply them li
 - **Prune by null test.** Any clause whose removal changes nothing is either redundant with trained defaults or too abstract to bind — delete it. Model-indexed claims live only in Model dispatch; the core must stay model-free.
 - **Re-verify dispatch at each model release.** Section II is sourced from OpenAI's Codex and model docs and has a shelf life of one model generation — re-check it against the current pages whenever a model is added or upgraded.
 - **Shared core with `CLAUDE.md`.** Section I is verbatim-identical to the `CLAUDE.md` kernel's invariant core; `AGENTS.md` has no include mechanism, so it is duplicated. When the core changes, update both entry files together.
-
-
-## Project pointers
-When working in `~/projects/trading/trading-framework`: follow that project's `CLAUDE.md` **User Preferences** — notably the *explain-everything reporting style* (define every concept in four parts: what it is · how it's measured/used · how it affects · what should happen/found; reports self-contain their concept explanations; master index at `src/notebooks/reports/findings/GLOSSARY.md`).

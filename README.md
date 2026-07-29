@@ -1,6 +1,6 @@
 # First-Principled Claude
 
-**Version 2.1**
+**Version 2.2**
 
 This repository contains the configuration and context files for **First-Principled Claude**, a framework designed to override the default sycophantic tendencies of Large Language Models (LLMs) and instill a rigorous, metacognitive, and adversarial problem-solving mindset.
 
@@ -14,7 +14,7 @@ To fundamentally change the model's capabilities, we must alter its operating co
 
 ## Structure
 
-As of v2.0, the kernel is stratified into layers so that model-specific tactics can drift and be re-verified without disturbing the epistemic core:
+The kernel is stratified into layers so that model-specific tactics can drift and be re-verified without disturbing the epistemic core. A third layer — your own preferences — lives outside this repo, in the `CLAUDE.md` that imports it (see Installation):
 
 ### I. Invariant core — model-independent
 The base operating system for the model's mindset, in force regardless of which model is running. Model-indexed claims are forbidden here by construction (see Maintenance).
@@ -31,9 +31,6 @@ The base operating system for the model's mindset, in force regardless of which 
 ### II. Model dispatch — model-specific overlay
 A thin layer, isolated so it can be re-verified per model release without touching the core: identify the running model from environment context (never introspection), then apply effort defaults and behavioral quirks specific to that model (e.g. how literally it follows instructions, how readily it self-spawns a de-anchored check).
 
-### III. User preferences
-Concrete personal overrides applied literally, never abstracted into principles (formatting rules, presentation order, project-specific pointers).
-
 ### Maintenance
 The kernel's own amendment rules: **intent over prescription** (state disciplines as goals, not step-sequences — model-specific tactics perish while epistemic intent survives releases); **prune by null test** (a clause whose removal changes nothing gets deleted); **re-verify Model dispatch at each model release.**
 
@@ -45,17 +42,40 @@ LLMs exhibit **context anchoring**: once a token is generated, it mathematically
 - **It reaches for a fresh context when independence matters.** A genuinely independent check comes from a new context that does not carry the prior reasoning forward, since reasoning already in the window keeps conditioning the output.
 - **It constrains what the model emits.** Every instruction targets observable output — what to generate, label, verify, or surface — which is the part of the model that instructions can actually move.
 
-## Entry points
+## Installation
 
-The kernel ships in two agent-native forms that share one invariant core:
+**The kernel is not a `CLAUDE.md` — it is meant to be *imported* by yours.** It carries no personal preferences (as of v2.2 those were stripped out), so it composes: your `CLAUDE.md` stays a short, personal file, and the kernel is a versioned dependency you can update by pulling this repo.
 
-- **Claude Code** reads [`.claude/CLAUDE.md`](.claude/CLAUDE.md) (Model dispatch: Opus / Sonnet / Fable branches).
-- **Codex** reads [`AGENTS.md`](AGENTS.md) (Model dispatch rewritten for GPT-5.x / o-series; effort via `model_reasoning_effort`).
+### Claude Code
 
-Section I (Invariant core) is verbatim-identical across both — only Section II (Model dispatch) and a handful of harness references differ. Because `AGENTS.md` has no include mechanism, the core is duplicated rather than shared; when it changes, update both files together.
+Drop [`first-principled-claude.md`](first-principled-claude.md) next to your `CLAUDE.md` (globally, `~/.claude/`; or per-project) and import it at the top with an `@` line:
 
-## Usage
+```markdown
+@first-principled-claude.md
 
-These files are designed to be ingested into the LLM's system prompt or workspace context.
+---
+
+# User preferences
+
+- **No LaTeX.** Plain Unicode math.
+- ... your own overrides here ...
+```
+
+Claude Code resolves `@path` imports relative to the importing file and inlines them into context. Ordering matters in the useful direction: the kernel loads first, your preferences follow as literal overrides on top of it.
+
+Why import rather than paste:
+- **Separation by change rate.** Preferences are personal and stable; the kernel is versioned and evolves per model release. Different lifetimes, different files.
+- **Updates are a `git pull`,** not a hand-merge into a file you have since edited.
+
+### Codex
+
+Codex has **no include mechanism** — `AGENTS.md` must be self-contained. Use [`AGENTS.md`](AGENTS.md) directly as (or appended to) your `~/.codex/AGENTS.md`, and append your own preferences to the end of it.
+
+### What differs between the two
+
+Section I (Invariant core) is verbatim-identical across `first-principled-claude.md` and `AGENTS.md`. Only Section II (Model dispatch — Opus/Sonnet/Fable vs. GPT-5.x/o-series, effort via `model_reasoning_effort`) and a handful of harness references differ. Because of the missing include mechanism the core is duplicated, so when it changes, update both files together.
+
+## What it feels like in use
+
 - For trivial tasks and mechanical edits, the model stays concise but first-principled.
 - For design, architecture, or costly-to-reverse decisions, the kernel's Reasoning discipline engages automatically: alternatives, adversarial self-critique, and an explicit surfacing of flaws, tradeoffs, and unverified assumptions.
