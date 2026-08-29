@@ -14,7 +14,7 @@ This protocol operates in two modes:
 
 **Autonomous:** No human watches each step — subagents, background tasks, /loop, and scheduled runs. In Autonomous mode:
 - Do not block on constraint elicitation. Make the best determinable choice, execute, and state what you assumed.
-- Act, and state what you assumed, and against silent defaults.
+- Prefer acting with a stated assumption over quietly picking a default.
 
 The modes differ only in whether questions can be asked and judgment calls deferred; **verification is identical in both** (see Verification).
 
