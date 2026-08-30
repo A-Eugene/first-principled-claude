@@ -42,38 +42,34 @@ LLMs exhibit **context anchoring**: once a token is generated, it mathematically
 - **It reaches for a fresh context when independence matters.** A genuinely independent check comes from a new context that does not carry the prior reasoning forward, since reasoning already in the window keeps conditioning the output.
 - **It constrains what the model emits.** Every instruction targets observable output — what to generate, label, verify, or surface — which is the part of the model that instructions can actually move.
 
-## Installation
+## Install
 
-**The kernel is not a `CLAUDE.md` — it is meant to be *imported* by yours.** It carries no personal preferences (as of v2.2 those were stripped out), so it composes: your `CLAUDE.md` stays a short, personal file, and the kernel is a versioned dependency you can update by pulling this repo.
+The kernel ships as a skill. Only its description is resident; the body loads
+when substantial work triggers it. Measured against a baseline with no skill on
+the same design task: same spec, plus stated assumptions with their inversions,
+one alternative rejected on its failure mode, and a line saying the independent
+check was not run. The baseline handed over the spec as if it were checked.
 
-### Claude Code
+Claude Code, Linux or macOS:
 
-Drop [`first-principled-claude.md`](first-principled-claude.md) next to your `CLAUDE.md` (globally, `~/.claude/`; or per-project) and import it at the top with an `@` line:
-
-```markdown
-@first-principled-claude.md
-
----
-
-# User preferences
-
-- **No LaTeX.** Plain Unicode math.
-- ... your own overrides here ...
+```bash
+./install.sh
 ```
 
-Claude Code resolves `@path` imports relative to the importing file and inlines them into context. Ordering matters in the useful direction: the kernel loads first, your preferences follow as literal overrides on top of it.
+Windows: `.\install.ps1`. Both copy, never symlink.
 
-Why import rather than paste:
-- **Separation by change rate.** Preferences are personal and stable; the kernel is versioned and evolves per model release. Different lifetimes, different files.
-- **Updates are a `git pull`,** not a hand-merge into a file you have since edited.
+claude.ai: upload `dist/first-principled.zip` under Settings › Customize ›
+Skills. Any paid plan with code execution on. Skills there are per-user and do
+not sync from Claude Code, so re-upload after a change.
 
-### Codex
+Add one line to your always-loaded instructions so the trigger does not depend
+on the model noticing:
 
-Codex has **no include mechanism** — `AGENTS.md` must be self-contained. Use [`AGENTS.md`](AGENTS.md) directly as (or appended to) your `~/.codex/AGENTS.md`, and append your own preferences to the end of it.
+> For substantial work — a design, an analysis, a decision that is costly to
+> reverse — load the `first-principled` skill before proposing an approach.
 
-### What differs between the two
-
-Section I (Invariant core) is verbatim-identical across `first-principled-claude.md` and `AGENTS.md`. Only Section II (Model dispatch — Opus/Sonnet/Fable vs. GPT-5.x/o-series, effort via `model_reasoning_effort`) and a handful of harness references differ. Because of the missing include mechanism the core is duplicated, so when it changes, update both files together.
+Section II, Model dispatch, is not in the skill. Effort and thinking are harness
+settings, not something a session can act on from a skill body.
 
 ## What it feels like in use
 
