@@ -58,9 +58,11 @@ Claude Code, Linux or macOS:
 
 Windows: `.\install.ps1`. Both copy, never symlink.
 
-claude.ai: upload `dist/first-principled.zip` under Settings › Customize ›
-Skills. Any paid plan with code execution on. Skills there are per-user and do
-not sync from Claude Code, so re-upload after a change.
+claude.ai: on GitHub, Code › Download ZIP, then upload that zip under
+Settings › Customize › Skills. Any paid plan with code execution on. If the
+upload rejects the zip, rename the extracted folder to `first-principled` and
+zip it again. Skills there are per-user and do not sync from Claude Code, so
+re-upload after a change.
 
 Add one line to your always-loaded instructions so the trigger does not depend
 on the model noticing:

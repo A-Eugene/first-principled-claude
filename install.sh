@@ -2,6 +2,6 @@
 # Claude Code: copy the skill into ~/.claude/skills. Copies, never symlinks.
 set -eu; cd "$(dirname "$0")"; ./build.sh >/dev/null
 mkdir -p ~/.claude/skills/first-principled
-cp skills/first-principled/SKILL.md ~/.claude/skills/first-principled/SKILL.md
+cp SKILL.md ~/.claude/skills/first-principled/SKILL.md
 echo "installed: ~/.claude/skills/first-principled/SKILL.md"
-echo "claude.ai: upload dist/first-principled.zip under Settings > Customize > Skills"
+echo "claude.ai: download the GitHub zip (Code > Download ZIP) and upload it under Settings > Customize > Skills"
