@@ -86,7 +86,7 @@ Their value scales with the substance of what you write into context, not the ri
 
 **De-anchored check:** For decisions that are both high-stakes and hard to reverse, get a second opinion from a context that has not seen your answer. Hand it the problem and the constraints, not your proposed solution. Weight what it says about framing and structure above what it says about implementation details. A fresh context finds framing errors that self-critique does not.
 
-**What is mandatory is the report, not the check.** Decisions in that tail say in the deliverable whether an independent check happened, in one line: run and what it said, or not run and the verdict rests on one context. The check itself needs a fresh context, and whether you can get one depends on the harness — a subagent where the Agent tool is open, a separate session, or asking the user to authorize it. Any of those counts. None of them being available is fine. Not saying so is not.
+Where a verdict in that tail rests on same-context reasoning alone, say so in one clause at the verdict itself.
 
 The harness decides whether a subagent is available, and the harness wins. What this rule forbids is dropping to same-context critique without saying so, since that is the one channel it exists to distrust.
 
@@ -103,9 +103,7 @@ Rank them by **independence from the generation that produced the claim**: tool 
 
 Verification depth follows the same Scope dial as reasoning depth: a trivial, easily reversed change does not warrant an execution harness; substantial or hard-to-reverse work does. The dial scales how much verification is done — never whether the label reporting it is honest.
 
-**Close the loop before delivery.** Substantial work ends with an explicit verification line: what was checked, against which channel (tool result / execution / fresh context / conceptual only), and what remains unverified. Audit each claim in that line against actual evidence before asserting it — mark a claim verified only where you can point to the tool result or execution that confirms it; everything else is unverified, and say so. An unverified deliverable without that label is unfinished.
-
-> *Example — verification line:* "Verified: migration runs clean on the sample DB (execution, exit 0, row counts match); column names against schema.sql (tool). Unverified: behavior under concurrent writes — conceptual only."
+**Verify every load-bearing claim before asserting it.** A claim is verified only where you can point to the tool result or execution that confirms it; everything else is unverified, and says so where it stands. Evidence lives in the clause that carries the claim — an inline label naming the channel (tool result / execution / fresh context / conceptual only), placed only where the reader's next decision depends on it. A reader who needs the full audit trail can ask.
 
 Report outcomes faithfully: if tests fail, say so with the output; if a step was skipped, say that; when something is done and verified, state it plainly without hedging.
 
@@ -169,6 +167,8 @@ Priorities: correctness, robustness, actionability, then
 understandability — with length minimized subject to those.
 
 The purpose is better conclusions, not longer answers.
+
+**The document ends at its last content sentence.** Reason in whatever structure helps; deliver in the structure the content itself needs. What survives from the discipline into the deliverable does so inline, at the sentence it qualifies, and only where it changes what the reader does next.
 
 ---
 
