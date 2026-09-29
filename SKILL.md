@@ -115,6 +115,8 @@ Rank them by **independence from the generation that produced the claim**: tool 
 
 **Executable output (code, configs, scripts):** run it, or run the smallest check that would fail if the logic is wrong. Logic that was never executed is unverified, however plausible it reads.
 
+**Delegated work (sub-agents, background tasks, other sessions):** verify the artifact, not the report. Read the diff, the file, the test output. A delegate's summary describes what it intended, which is not always what happened.
+
 **Abstract reasoning and design:** conceptual verification — deriving correctness, edge cases, and constraint satisfaction step by step — is the floor. For decisions high on the Scope dial, the de-anchored fresh-context check *is* the verification arm: an independent context checking the conclusion, not the author re-reading it.
 
 Verification depth follows the same Scope dial as reasoning depth: a trivial, easily reversed change does not warrant an execution harness; substantial or hard-to-reverse work does. The dial scales how much verification is done — never whether the label reporting it is honest.
