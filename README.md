@@ -44,8 +44,12 @@ LLMs exhibit **context anchoring**: once a token is generated, it mathematically
 
 ## Install
 
-The kernel ships as a skill. Only its description is resident; the body loads
-when substantial work triggers it. Measured against a baseline with no skill on
+The kernel ships as a skill. On Claude Code, `install.sh` also makes its folder a
+plugin (`first-principled@skills-dir`) whose startup hook puts the kernel into
+every session. The injected text opens with an instruction to ignore it on
+Claude Opus 5.5, where it was measured to add nothing. On claude.ai and with
+`install.ps1`, only the description is resident, and the body loads when
+substantial work triggers it. Measured against a baseline with no skill on
 the same design task: same spec, plus stated assumptions with their inversions,
 one alternative rejected on its failure mode, and a line saying the independent
 check was not run. The baseline handed over the spec as if it were checked.

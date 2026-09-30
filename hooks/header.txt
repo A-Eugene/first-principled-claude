@@ -1,0 +1,1 @@
+first-principled: put in context at session start by its plugin. If your system prompt says you are Claude Opus 5.5, ignore this block, because it was measured to add nothing on that model. Every other model follows it
