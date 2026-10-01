@@ -7,7 +7,7 @@
     {
       "name": "first-principled",
       "source": "./",
-      "description": "Reasoning discipline for substantial work, always in effect except on Claude Opus 5.5."
+      "description": "Reasoning discipline for substantial work, except on Claude Opus 5.5."
     }
   ]
 }

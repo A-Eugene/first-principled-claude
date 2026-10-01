@@ -1,6 +1,6 @@
 {
   "name": "first-principled",
   "version": "1.0.0",
-  "description": "Reasoning discipline for substantial work, always in effect except on Claude Opus 5.5.",
+  "description": "Reasoning discipline for substantial work, except on Claude Opus 5.5.",
   "contextFileName": "SKILL.md"
 }

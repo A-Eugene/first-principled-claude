@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
-# Claude Code: install the skill as a plugin in its own skills folder. The
-# folder is both the skill and a plugin (.claude-plugin/plugin.json), and the
-# plugin's startup hook puts the skill's text into every session. Copies,
-# never symlinks. Takes effect in the next session, or after /reload-plugins.
+# Claude Code: copy the skill into its own folder under ~/.claude/skills.
+# The folder is also a plugin (.claude-plugin/plugin.json) so a claude.ai
+# account can install it from this repo. Copies, never symlinks.
 set -eu; cd "$(dirname "$0")"
 ./build.sh >/dev/null
 dest=~/.claude/skills/first-principled
 mkdir -p "$dest"
-cp -r SKILL.md .claude-plugin hooks "$dest"/
+cp -r SKILL.md .claude-plugin "$dest"/
+rm -rf "$dest/hooks"
 echo "installed: $dest (skill and plugin first-principled@skills-dir)"
 
 # Codex always reads ~/.codex/AGENTS.md. --codex writes this skill there as a
