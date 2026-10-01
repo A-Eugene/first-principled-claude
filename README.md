@@ -81,3 +81,16 @@ settings, not something a session can act on from a skill body.
 
 - For trivial tasks and mechanical edits, the model stays concise but first-principled.
 - For design, architecture, or costly-to-reverse decisions, the kernel's Reasoning discipline engages automatically: alternatives, adversarial self-critique, and an explicit surfacing of flaws, tradeoffs, and unverified assumptions.
+
+## Where it works
+
+| Surface | How | Always on? |
+|---|---|---|
+| Claude Code, this machine | `./install.sh` (the folder loads as `first-principled@skills-dir`) | Yes, through the plugin's startup hook |
+| Claude Code, any machine | `claude plugin marketplace add A-Eugene/first-principled-claude` then `claude plugin install first-principled@first-principled` | Yes |
+| claude.ai account | Customize › Plugins › Add › Add marketplace › `A-Eugene/first-principled-claude` | Cowork: yes. Chat: the skill loads on demand, because chat ignores hooks. Claude Code signed into the account: yes, synced |
+| Codex | `./install.sh --codex` writes a marked block into `~/.codex/AGENTS.md` | Yes |
+| Gemini CLI | `gemini extensions install https://github.com/A-Eugene/first-principled-claude` (context file `SKILL.md`) | Yes, untested |
+
+Install it one way per machine. A plugin added to the claude.ai account also syncs
+into Claude Code there, and a second copy would put the same text in twice.

@@ -1,0 +1,13 @@
+{
+  "name": "first-principled",
+  "owner": {
+    "name": "A-Eugene"
+  },
+  "plugins": [
+    {
+      "name": "first-principled",
+      "source": "./",
+      "description": "Reasoning discipline for substantial work, always in effect except on Claude Opus 5.5."
+    }
+  ]
+}
