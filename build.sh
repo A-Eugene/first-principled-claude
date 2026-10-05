@@ -5,4 +5,7 @@ set -eu; cd "$(dirname "$0")"
 { cat FRONTMATTER.md
   sed -n '/^# I\. Invariant core/,/^# II\. Model dispatch/{/^# II\./!p}' first-principled-claude.md | sed '$d'
 } > SKILL.md
-echo "built: SKILL.md"
+# claude.ai rejects a skill whose description is over 1024 characters.
+n=$(python3 -c 'import sys,yaml; print(len(yaml.safe_load(open("FRONTMATTER.md").read().strip().strip("-"))["description"]))')
+[ "$n" -le 1024 ] || { echo "FRONTMATTER.md: description is $n characters, the limit is 1024" >&2; exit 1; }
+echo "built: SKILL.md (description $n characters)"
