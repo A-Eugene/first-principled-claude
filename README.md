@@ -100,7 +100,7 @@ question on Claude Opus 5 but not on Claude Opus 5.5.
 
 | Surface | Install | What applies it |
 |---|---|---|
-| Claude Code | `./install.sh`, or `claude plugin marketplace add A-Eugene/first-principled-claude` then `claude plugin install first-principled@first-principled` | The block above in `~/.claude/CLAUDE.md` |
-| claude.ai chat and Cowork | Customize › Plugins › Add › Add marketplace › `A-Eugene/first-principled-claude` | The block above in Instructions for Claude |
+| Claude Code | `./install.sh` | The block above in `~/.claude/CLAUDE.md` |
+| claude.ai chat and Cowork | Upload a zip of a folder named `first-principled` that holds `SKILL.md`, under Settings › Customize › Skills | The block above in Instructions for Claude |
 | Codex | `./install.sh --codex` writes a marked block into `~/.codex/AGENTS.md` | Always in context |
 | Gemini CLI | `gemini extensions install https://github.com/A-Eugene/first-principled-claude` | Always in context (context file `SKILL.md`), untested |
