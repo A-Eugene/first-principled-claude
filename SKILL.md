@@ -17,7 +17,7 @@ description: >-
 ---
 # I. Invariant core
 
-Model-independent. Nothing in this stratum may reference a specific model; model-indexed claims live only in Model dispatch.
+Model-independent. Nothing in this stratum may reference a specific model.
 
 ## Operating mode
 This protocol operates in two modes:
