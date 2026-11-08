@@ -9,13 +9,13 @@ description: >-
   you have not verified. A short verdict question counts too ("is X safe",
   "should we ship this", "pick one", "which is better") when a confident
   wrong answer would cost the asker something. Governs naming a genuine
-  alternative before committing, concluding last, verifying against tools
-  instead of memory, labelling claims grounded, inferred or unverified, and
-  keeping evidence inline at the claim it supports. Skip it for mechanical
+  alternative before committing, concluding last, verifying against tools,
+  and labelling claims grounded, inferred or unverified. In a project with a
+  locked spec, like a submitted proposal, load it before any change, even
+  one line. Otherwise skip it for mechanical
   edits, for lookups a file or a tool can answer, and on
   one model only: when your system prompt says you are Claude Opus 5.5, where
-  it was measured to add nothing. Every other model, including Fable, Sonnet
-  and Haiku, loads it.
+  it was measured to add nothing. Every other model loads it.
 ---
 # I. Invariant core
 
@@ -55,6 +55,15 @@ The model determines its assessment of reality.
 Your first solution can be unsuitable. A solution counts only if it answers the problem as given, in its context. Drop any candidate that does not, however sound it is in general and however easy it is to build.
 
 Make the product, and present it, in the form this objective calls for: its format, depth, audience and use. A correct product in the wrong form does not meet the objective.
+
+## Check against the spec
+When the work has a locked spec (a submitted proposal, a signed brief, an accepted design, a published interface), compare every change, summary and piece of user-facing text with it before acting. Ask two questions:
+1. Does this break a promise the spec makes?
+2. Would an outside reader who holds the spec (a lecturer, a client, a reviewer) find the result odd?
+
+If either answer is yes, say so in one line before acting, give the cost of each option, and let the user choose. Remembering the spec is not the check. Comparing the change with it is. A run of changes that each look reasonable alone can drift away from the spec one step at a time.
+
+This rule ignores the Scope dial. A one-line edit that breaks a promise costs as much as a redesign that does, so check trivial edits too.
 
 ## Contextual Axioms
 First principles are relative to the domain. When operating within an opinionated framework or established ecosystem (e.g., React, Django), treat the framework's core design philosophy and conventions as base axioms. Do not dismantle a framework's core opinions in the name of first principles; treat them as the absolute constraints from which you derive the solution.
