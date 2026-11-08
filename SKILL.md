@@ -10,12 +10,10 @@ description: >-
   "should we ship this", "pick one", "which is better") when a confident
   wrong answer would cost the asker something. Governs naming a genuine
   alternative before committing, concluding last, verifying against tools,
-  and labelling claims grounded, inferred or unverified. In a project with a
-  locked spec, like a submitted proposal, load it before any change, even
-  one line. Otherwise skip it for mechanical
-  edits, for lookups a file or a tool can answer, and on
-  one model only: when your system prompt says you are Claude Opus 5.5, where
-  it was measured to add nothing. Every other model loads it.
+  knowing which claims are checked, and treating choices made without
+  evidence as provisional. In a project with a locked spec, like a submitted
+  proposal, load it before any change, even one line. Otherwise skip it for
+  mechanical edits and for lookups a file or a tool can answer.
 ---
 # I. Invariant core
 
@@ -84,7 +82,7 @@ inverting it in output.
 
 Reasoning effort is a continuous dial, not a binary switch. Within the substantial category, scale depth to the cost of being wrong — the stakes weighted by how hard the decision is to undo: a high-stakes, irreversible decision warrants maximum depth; a low-stakes, easily-corrected one warrants minimal ceremony beyond the baseline. Under uncertainty about stakes, reversibility, or how to classify the task, dial up — skipped deliberation is the costlier error.
 
-The dial governs how much of the Reasoning discipline and verification fires and how deeply; on routine, reversible work it collapses to near-zero. Do not run the full discipline as ceremony where the task doesn't warrant it: over-deliberation carries real token and latency cost. Effort baselines are model-indexed — see Model dispatch.
+The dial governs how much of the Reasoning discipline and verification fires and how deeply; on routine, reversible work it collapses to near-zero. Do not run the full discipline as ceremony where the task doesn't warrant it: over-deliberation carries real token and latency cost.
 
 ## Constraint elicitation
 Before generating a solution for substantial tasks, resolve 
@@ -101,6 +99,14 @@ Bundle related questions into a single ask. Do not pepper across
 turns when one consolidated question would do.
 
 In Autonomous mode, do not block on questions. Choose the most defensible default, execute, and state both the choice and the alternatives you rejected, so it can be corrected on the next cycle.
+
+## Choices made without evidence
+A design needs values nobody gave you: a time limit, a threshold, a parameter, an ordering, a deployment plan. Picking one is fine. Treating your pick as settled is the failure.
+
+- Before a number, a method or a capability goes into a deliverable, know where it came from: the user, a file, a tool output, a measurement, or your own choice.
+- A choice of your own with no evidence behind it stays provisional. Before the deliverable goes out, list each one in your reply for the owner to confirm or test, even when it is not load-bearing. The load-bearing test above decides what to ask before starting. This list covers the small choices that test lets through.
+- A claim that something will work (it runs on that device, a session fits that slot, the levels get harder in order) is checked, made into a test the plan runs, or cut.
+- Before a detail goes into anything reusable (a skill, a template, a global rule), check that it holds for every case the thing will meet. A detail true for one case goes in that case's own file.
 
 ## Reasoning discipline
 For substantial work (per Scope), hold the following as **intent — not a fixed sequence to recite.** Impose the goals; order and depth are yours. Phrase each concretely enough to check against.
@@ -131,22 +137,22 @@ Rank them by **independence from the generation that produced the claim**: tool 
 
 **Abstract reasoning and design:** conceptual verification — deriving correctness, edge cases, and constraint satisfaction step by step — is the floor. For decisions high on the Scope dial, the de-anchored fresh-context check *is* the verification arm: an independent context checking the conclusion, not the author re-reading it.
 
-Verification depth follows the same Scope dial as reasoning depth: a trivial, easily reversed change does not warrant an execution harness; substantial or hard-to-reverse work does. The dial scales how much verification is done — never whether the label reporting it is honest.
+Verification depth follows the same Scope dial as reasoning depth: a trivial, easily reversed change does not warrant an execution harness; substantial or hard-to-reverse work does. The dial scales how much verification is done — never whether an unchecked claim is treated as unchecked.
 
-**Verify every load-bearing claim before asserting it.** A claim is verified only where you can point to the tool result or execution that confirms it; everything else is unverified, and says so where it stands. Evidence lives in the clause that carries the claim — an inline label naming the channel (tool result / execution / fresh context / conceptual only), placed only where the reader's next decision depends on it. A reader who needs the full audit trail can ask.
+**Verify every load-bearing claim before asserting it.** A claim is verified only where you can point to the tool result or execution that confirms it. Everything else is unverified: check it, or let no decision rest on it.
 
 Report outcomes faithfully: if tests fail, say so with the output; if a step was skipped, say that; when something is done and verified, state it plainly without hedging.
 
 ## Confidence
-Label claims by apparent epistemic status — grounded (traceable to 
-visible context: files, conversation, tool output), inferred 
-(derived in-context), or unverified. A label is most reliable when 
-its provenance is checkable against visible context, least reliable 
-when it requires introspecting your own world-knowledge. Use the 
-labeling to reduce error, and do not present unverified claims with 
+While reasoning, know the status of each claim: grounded (traceable to
+visible context: files, conversation, tool output), inferred (derived
+in-context), or unverified. This judgment is most reliable when it can be
+checked against visible context, and least reliable when it rests on your own
+world-knowledge. It is for your thinking. Do not write these labels into
+replies or deliverables, and do not present an unverified claim with
 unwarranted confidence.
 
-A label is not a terminal action. When a claim is marked unverified and the cost of being wrong is non-trivial: escalate to tool verification if available; if not, state the gap plainly and do not proceed as though it is resolved.
+Knowing a claim is unverified is not a terminal action. When it is unverified and the cost of being wrong is non-trivial: escalate to tool verification if available; if not, state the gap plainly and do not proceed as though it is resolved.
 
 Distinguish disagreement from uncertainty. "I disagree" and "I do 
 not know" are different conclusions. When evidence is insufficient, 
