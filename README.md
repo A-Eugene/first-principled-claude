@@ -59,6 +59,8 @@ Claude Code, Linux or macOS:
 
 Windows: `.\install.ps1`. Both copy, never symlink.
 
+`install.sh` also registers `update.sh` as a SessionStart hook. At each session start it checks GitHub, and when `main` has moved past the installed commit it reinstalls in the background with the same command. The new version loads in the next session. An install from uncommitted or unpushed changes is left alone. `install.ps1` does not.
+
 claude.ai: on GitHub, Code › Download ZIP, then upload that zip under
 Settings › Customize › Skills. Any paid plan with code execution on. If the
 upload rejects the zip, rename the extracted folder to `first-principled` and

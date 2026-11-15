@@ -9,6 +9,25 @@ cp SKILL.md "$dest"/
 rm -rf "$dest/hooks" "$dest/.claude-plugin"
 echo "installed: $dest"
 
+# Auto-update: update.sh runs at every Claude Code session start and reinstalls from
+# the source repo's main, with this same command, when main has moved past this install.
+cp update.sh "$dest"/
+git remote get-url origin > "$dest/.source" 2>/dev/null || echo "https://github.com/A-Eugene/first-principled-claude" > "$dest/.source"
+commit=$(git rev-parse HEAD 2>/dev/null) || commit=
+[ -z "$(git status --porcelain 2>/dev/null)" ] || commit="$commit-dirty"
+echo "$commit" > "$dest/.commit"
+echo "./install.sh${*:+$(printf ' %q' "$@")}" > "$dest/.install"
+/usr/bin/env python3 - "$HOME/.claude/settings.json" "\"$dest/update.sh\"" <<'HOOK'
+import json, os, sys
+path, cmd = sys.argv[1:3]
+d = json.load(open(path)) if os.path.exists(path) else {}
+starts = d.setdefault("hooks", {}).setdefault("SessionStart", [])
+if not any(h.get("command") == cmd for e in starts for h in e.get("hooks", [])):
+    starts.append({"hooks": [{"type": "command", "command": cmd}]})
+    json.dump(d, open(path, "w"), indent=2)
+    print(f"registered: {cmd} in {path}")
+HOOK
+
 # Codex always reads ~/.codex/AGENTS.md. --codex writes this skill there as a
 # marked block, which a later install replaces in place.
 if [ "${1:-}" = "--codex" ]; then
