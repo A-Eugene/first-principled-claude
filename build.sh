@@ -3,8 +3,7 @@
 # from it. Edit the .md, never SKILL.md.
 set -eu; cd "$(dirname "$0")"
 { cat FRONTMATTER.md
-  sed -n '/^# I\. Invariant core/,/^# II\. Model dispatch/{/^# II\./!p}' first-principled-claude.md | sed '$d' |
-    sed 's/; model-indexed claims live only in Model dispatch\././'
+  sed -n '/^# I\. Core/,/^# II\. Model dispatch/{/^# II\./!p}' first-principled-claude.md | sed '$d'
 } > SKILL.md
 # claude.ai rejects a skill whose description is over 1024 characters.
 n=$(python3 -c 'import sys,yaml; print(len(yaml.safe_load(open("FRONTMATTER.md").read().strip().strip("-"))["description"]))')

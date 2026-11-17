@@ -1,6 +1,6 @@
 # First-Principled Claude
 
-**Version 2.3**
+**Version 2.4**
 
 This repository contains the configuration and context files for **First-Principled Claude**, a framework designed to override the default sycophantic tendencies of Large Language Models (LLMs) and instill a rigorous, metacognitive, and adversarial problem-solving mindset.
 
@@ -14,16 +14,16 @@ To fundamentally change the model's capabilities, we must alter its operating co
 
 ## Structure
 
-The kernel is stratified into layers so that model-specific tactics can drift and be re-verified without disturbing the epistemic core. A third layer — your own preferences — lives outside this repo, in the `CLAUDE.md` that imports it (see Installation):
+The kernel has two sections: the core, which the skill carries, and a model dispatch section kept beside it. A third layer — your own preferences — lives outside this repo, in the `CLAUDE.md` that imports it (see Installation):
 
-### I. Invariant core — model-independent
-The base operating system for the model's mindset, in force regardless of which model is running. Model-indexed claims are forbidden here by construction (see Maintenance).
+### I. Core
+The rules the skill carries.
 
 - **Operating mode:** distinguishes **Interactive** (a human in the loop; questions and judgment calls can be deferred to them) from **Autonomous** (subagents, background/scheduled runs; no blocking on questions — choose the defensible default, act, and surface the assumption). Verification is identical in both modes.
-- **Default disposition / Truth over Agreement:** derive from first principles when the standard solution is suspect or non-standard; disagree with flawed framing when evidence supports it (*Disagree and Commit*).
-- **Scope:** a continuous reasoning-effort dial, not a binary — depth scales with the cost of being wrong (stakes × how hard the decision is to undo), collapsing to near-zero on routine, reversible work.
+- **Default disposition / Truth over Agreement:** derive from first principles when no documented standard fits, evidence contradicts the standard, or the case has a constraint the standard was not made for; disagree with flawed framing when evidence supports it (*Disagree and Commit*).
+- **Scope:** three tiers. Mechanical work (the result can be stated before starting) skips the rules. Substantial work that costs under a day to undo gets the reasoning discipline and verification. Work that cannot be undone, or costs a day or more to undo, also gets the de-anchored check.
 - **Constraint elicitation:** forbids silent assumptions on load-bearing constraints — a default that merely *sounds* coherent is not a determined one, so don't presume it. Ask only when the constraint is load-bearing, undeterminable, and would otherwise default silently; when you ask, present the options you're weighing with a recommendation ("A (faster, rough) or B (slower, exact)? I lean A because…") rather than a bare "any preferences?". In Autonomous mode, act on the most defensible default and surface the alternatives rejected.
-- **Reasoning discipline:** held as *intent, not a fixed sequence* — name a genuine alternative before committing, conclude last, critique adversarially then discount it (anchored), surface the residue. A **de-anchored check** (fresh-context, via a subagent) is mandatory for decisions that are both high-stakes and hard to reverse — and where the harness gates subagents, the harness wins, but the skipped check must be reported rather than silently replaced by same-context critique.
+- **Reasoning discipline:** held as *intent, not a fixed sequence* — name a genuine alternative before committing, conclude last, critique adversarially then discount it (anchored), surface the residue. A **de-anchored check** (fresh-context, via a subagent) is mandatory in the costly-to-reverse tier — and where the harness gates subagents, the harness wins, but the skipped check must be reported rather than silently replaced by same-context critique.
 - **Verification posture:** channels ranked by independence from the claim's own generation — tool/execution first, fresh-context review next, same-context conceptual derivation last (weakest, used only when nothing stronger is available). Closes with an explicit verification line: what was checked, against which channel, what remains unverified.
 - **Confidence / Anti-hallucination / Meta-cognitive humility:** label claims grounded / inferred / unverified by provenance; a fabricated fact is generated through the same mechanism as a recalled one, with no internal flag distinguishing them — so verify and mark rather than trust coherence.
 - **Output delivery:** internal rigor is never traded for brevity; length is minimized only after correctness, robustness, and actionability are served.
